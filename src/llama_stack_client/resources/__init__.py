@@ -120,6 +120,14 @@ from .benchmarks import (
     BenchmarksResourceWithStreamingResponse,
     AsyncBenchmarksResourceWithStreamingResponse,
 )
+from .pipelines import (
+    PipelinesResource,
+    AsyncPipelinesResource,
+    PipelinesResourceWithRawResponse,
+    AsyncPipelinesResourceWithRawResponse,
+    PipelinesResourceWithStreamingResponse,
+    AsyncPipelinesResourceWithStreamingResponse,
+)
 from .toolgroups import (
     ToolgroupsResource,
     AsyncToolgroupsResource,
@@ -310,4 +318,10 @@ __all__ = [
     "AsyncBenchmarksResourceWithRawResponse",
     "BenchmarksResourceWithStreamingResponse",
     "AsyncBenchmarksResourceWithStreamingResponse",
+    "PipelinesResource",
+    "AsyncPipelinesResource",
+    "PipelinesResourceWithRawResponse",
+    "AsyncPipelinesResourceWithRawResponse",
+    "PipelinesResourceWithStreamingResponse",
+    "AsyncPipelinesResourceWithStreamingResponse",
 ]
