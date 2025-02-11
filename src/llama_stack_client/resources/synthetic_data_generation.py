@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Any, Dict, Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -51,9 +51,8 @@ class SyntheticDataGenerationResource(SyncAPIResource):
     def generate(
         self,
         *,
-        dialogs: Iterable[Message],
-        filtering_function: Literal["none", "random", "top_k", "top_p", "top_k_top_p", "sigmoid"],
-        model: str | NotGiven = NOT_GIVEN,
+        dataset_id: str,
+        pipeline_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,9 +76,8 @@ class SyntheticDataGenerationResource(SyncAPIResource):
             "/v1/synthetic-data-generation/generate",
             body=maybe_transform(
                 {
-                    "dialogs": dialogs,
-                    "filtering_function": filtering_function,
-                    "model": model,
+                    "dataset_id": dataset_id,
+                    "pipeline_id": pipeline_id,
                 },
                 synthetic_data_generation_generate_params.SyntheticDataGenerationGenerateParams,
             ),
@@ -113,9 +111,8 @@ class AsyncSyntheticDataGenerationResource(AsyncAPIResource):
     async def generate(
         self,
         *,
-        dialogs: Iterable[Message],
-        filtering_function: Literal["none", "random", "top_k", "top_p", "top_k_top_p", "sigmoid"],
-        model: str | NotGiven = NOT_GIVEN,
+        dataset_id: str,
+        pipeline_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -139,9 +136,8 @@ class AsyncSyntheticDataGenerationResource(AsyncAPIResource):
             "/v1/synthetic-data-generation/generate",
             body=await async_maybe_transform(
                 {
-                    "dialogs": dialogs,
-                    "filtering_function": filtering_function,
-                    "model": model,
+                    "dataset_id": dataset_id,
+                    "pipeline_id": pipeline_id,
                 },
                 synthetic_data_generation_generate_params.SyntheticDataGenerationGenerateParams,
             ),
