@@ -70,6 +70,7 @@ from .scoring_score_params import ScoringScoreParams as ScoringScoreParams
 from .shield_list_response import ShieldListResponse as ShieldListResponse
 from .agent_create_response import AgentCreateResponse as AgentCreateResponse
 from .dataset_list_response import DatasetListResponse as DatasetListResponse
+from .pipeline_list_response import PipelineListResponse as PipelineListResponse
 from .list_shields_response import ListShieldsResponse as ListShieldsResponse
 from .memory_retrieval_step import MemoryRetrievalStep as MemoryRetrievalStep
 from .model_register_params import ModelRegisterParams as ModelRegisterParams
@@ -85,6 +86,7 @@ from .shield_register_params import ShieldRegisterParams as ShieldRegisterParams
 from .tool_invocation_result import ToolInvocationResult as ToolInvocationResult
 from .vector_io_query_params import VectorIoQueryParams as VectorIoQueryParams
 from .dataset_register_params import DatasetRegisterParams as DatasetRegisterParams
+from .pipeline_register_params import PipelineRegisterParams as PipelineRegisterParams
 from .eval_task_list_response import EvalTaskListResponse as EvalTaskListResponse
 from .list_providers_response import ListProvidersResponse as ListProvidersResponse
 from .scoring_fn_params_param import ScoringFnParamsParam as ScoringFnParamsParam
@@ -95,6 +97,7 @@ from .list_eval_tasks_response import ListEvalTasksResponse as ListEvalTasksResp
 from .list_vector_dbs_response import ListVectorDBsResponse as ListVectorDBsResponse
 from .safety_run_shield_params import SafetyRunShieldParams as SafetyRunShieldParams
 from .dataset_retrieve_response import DatasetRetrieveResponse as DatasetRetrieveResponse
+from .pipeline_retrieve_response import PipelineRetrieveResponse as PipelineRetrieveResponse
 from .eval_evaluate_rows_params import EvalEvaluateRowsParams as EvalEvaluateRowsParams
 from .eval_task_register_params import EvalTaskRegisterParams as EvalTaskRegisterParams
 from .list_tool_groups_response import ListToolGroupsResponse as ListToolGroupsResponse
