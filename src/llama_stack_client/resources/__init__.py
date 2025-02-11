@@ -128,6 +128,14 @@ from .eval_tasks import (
     EvalTasksResourceWithStreamingResponse,
     AsyncEvalTasksResourceWithStreamingResponse,
 )
+from .pipelines import (
+    PipelinesResource,
+    AsyncPipelinesResource,
+    PipelinesResourceWithRawResponse,
+    AsyncPipelinesResourceWithRawResponse,
+    PipelinesResourceWithStreamingResponse,
+    AsyncPipelinesResourceWithStreamingResponse,
+)
 from .toolgroups import (
     ToolgroupsResource,
     AsyncToolgroupsResource,
@@ -324,4 +332,10 @@ __all__ = [
     "AsyncEvalTasksResourceWithRawResponse",
     "EvalTasksResourceWithStreamingResponse",
     "AsyncEvalTasksResourceWithStreamingResponse",
+    "PipelinesResource",
+    "AsyncPipelinesResource",
+    "PipelinesResourceWithRawResponse",
+    "AsyncPipelinesResourceWithRawResponse",
+    "PipelinesResourceWithStreamingResponse",
+    "AsyncPipelinesResourceWithStreamingResponse",
 ]
