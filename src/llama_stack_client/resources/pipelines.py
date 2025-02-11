@@ -6,7 +6,7 @@ from typing import Dict, Type, Union, Iterable, Optional, cast
 
 import httpx
 
-from ..types import dataset_register_params
+from ..types import pipeline_register_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import (
     maybe_transform,
@@ -23,9 +23,9 @@ from .._response import (
 from .._wrappers import DataWrapper
 from .._base_client import make_request_options
 from ..types.shared_params.url import URL
-from ..types.dataset_list_response import DatasetListResponse
+from ..types.pipeline_list_response import PipelineListResponse
 from ..types.shared_params.param_type import ParamType
-from ..types.dataset_retrieve_response import DatasetRetrieveResponse
+from ..types.pipeline_retrieve_response import PipelineRetrieveResponse
 
 __all__ = ["PipelinesResource", "AsyncPipelinesResource"]
 
@@ -60,7 +60,7 @@ class PipelinesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[DatasetRetrieveResponse]:
+    ) -> Optional[PipelineRetrieveResponse]:
         """
         Args:
           extra_headers: Send extra headers
@@ -78,7 +78,7 @@ class PipelinesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DatasetRetrieveResponse,
+            cast_to=PipelineRetrieveResponse,
         )
 
     def list(
@@ -90,7 +90,7 @@ class PipelinesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DatasetListResponse:
+    ) -> PipelineListResponse:
         return self._get(
             "/v1/pipelines",
             options=make_request_options(
@@ -98,9 +98,9 @@ class PipelinesResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[DatasetListResponse]._unwrapper,
+                post_parser=DataWrapper[PipelineListResponse]._unwrapper,
             ),
-            cast_to=cast(Type[DatasetListResponse], DataWrapper[DatasetListResponse]),
+            cast_to=cast(Type[PipelineListResponse], DataWrapper[PipelineListResponse]),
         )
 
     def register(
@@ -137,7 +137,7 @@ class PipelinesResource(SyncAPIResource):
                     "metadata": metadata,
                     "provider_id": provider_id,
                 },
-                dataset_register_params.DatasetRegisterParams,
+                pipeline_register_params.PipelineRegisterParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -208,7 +208,7 @@ class AsyncPipelinesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[DatasetRetrieveResponse]:
+    ) -> Optional[PipelineRetrieveResponse]:
         """
         Args:
           extra_headers: Send extra headers
@@ -226,7 +226,7 @@ class AsyncPipelinesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DatasetRetrieveResponse,
+            cast_to=PipelineRetrieveResponse,
         )
 
     async def list(
@@ -238,7 +238,7 @@ class AsyncPipelinesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DatasetListResponse:
+    ) -> PipelineListResponse:
         return await self._get(
             "/v1/pipelines",
             options=make_request_options(
@@ -246,9 +246,9 @@ class AsyncPipelinesResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[DatasetListResponse]._unwrapper,
+                post_parser=DataWrapper[PipelineListResponse]._unwrapper,
             ),
-            cast_to=cast(Type[DatasetListResponse], DataWrapper[DatasetListResponse]),
+            cast_to=cast(Type[PipelineListResponse], DataWrapper[PipelineListResponse]),
         )
 
     async def register(
@@ -285,7 +285,7 @@ class AsyncPipelinesResource(AsyncAPIResource):
                     "metadata": metadata,
                     "provider_id": provider_id,
                 },
-                dataset_register_params.DatasetRegisterParams,
+                pipeline_register_params.PipelineRegisterParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
