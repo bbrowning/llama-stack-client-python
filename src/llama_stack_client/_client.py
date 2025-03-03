@@ -38,7 +38,7 @@ from .resources import (
     providers,
     telemetry,
     vector_io,
-    benchmarks,,
+    benchmarks,
     pipelines,
     toolgroups,
     vector_dbs,
