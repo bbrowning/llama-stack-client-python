@@ -39,11 +39,11 @@ from .resources import (
     telemetry,
     vector_io,
     benchmarks,
-    pipelines,
     toolgroups,
     vector_dbs,
     batch_inference,
     scoring_functions,
+    sdg_functions,
     synthetic_data_generation,
 )
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -92,8 +92,8 @@ class LlamaStackClient(SyncAPIClient):
     telemetry: telemetry.TelemetryResource
     scoring: scoring.ScoringResource
     scoring_functions: scoring_functions.ScoringFunctionsResource
+    sdg_functions: sdg_functions.SDGFunctionsResource
     benchmarks: benchmarks.BenchmarksResource
-    pipelines: pipelines.PipelinesResource
     with_raw_response: LlamaStackClientWithRawResponse
     with_streaming_response: LlamaStackClientWithStreamedResponse
 
@@ -174,8 +174,8 @@ class LlamaStackClient(SyncAPIClient):
         self.telemetry = telemetry.TelemetryResource(self)
         self.scoring = scoring.ScoringResource(self)
         self.scoring_functions = scoring_functions.ScoringFunctionsResource(self)
+        self.sdg_functions = sdg_functions.SDGFunctionsResource(self)
         self.benchmarks = benchmarks.BenchmarksResource(self)
-        self.pipelines = pipelines.PipelinesResource(self)
         self.with_raw_response = LlamaStackClientWithRawResponse(self)
         self.with_streaming_response = LlamaStackClientWithStreamedResponse(self)
 
@@ -308,8 +308,8 @@ class AsyncLlamaStackClient(AsyncAPIClient):
     telemetry: telemetry.AsyncTelemetryResource
     scoring: scoring.AsyncScoringResource
     scoring_functions: scoring_functions.AsyncScoringFunctionsResource
+    sdg_functions: sdg_functions.AsyncSDGFunctionsResource
     benchmarks: benchmarks.AsyncBenchmarksResource
-    pipelines: pipelines.AsyncPipelinesResource
     with_raw_response: AsyncLlamaStackClientWithRawResponse
     with_streaming_response: AsyncLlamaStackClientWithStreamedResponse
 
@@ -390,8 +390,8 @@ class AsyncLlamaStackClient(AsyncAPIClient):
         self.telemetry = telemetry.AsyncTelemetryResource(self)
         self.scoring = scoring.AsyncScoringResource(self)
         self.scoring_functions = scoring_functions.AsyncScoringFunctionsResource(self)
+        self.sdg_functions = sdg_functions.AsyncSDGFunctionsResource(self)
         self.benchmarks = benchmarks.AsyncBenchmarksResource(self)
-        self.pipelines = pipelines.AsyncPipelinesResource(self)
         self.with_raw_response = AsyncLlamaStackClientWithRawResponse(self)
         self.with_streaming_response = AsyncLlamaStackClientWithStreamedResponse(self)
 
@@ -527,8 +527,8 @@ class LlamaStackClientWithRawResponse:
         self.telemetry = telemetry.TelemetryResourceWithRawResponse(client.telemetry)
         self.scoring = scoring.ScoringResourceWithRawResponse(client.scoring)
         self.scoring_functions = scoring_functions.ScoringFunctionsResourceWithRawResponse(client.scoring_functions)
+        self.sdg_functions = sdg_functions.SDGFunctionsResourceWithRawResponse(client.sdg_functions)
         self.benchmarks = benchmarks.BenchmarksResourceWithRawResponse(client.benchmarks)
-        self.pipelines = pipelines.PipelinesResourceWithRawResponse(client.pipelines)
 
 
 class AsyncLlamaStackClientWithRawResponse:
@@ -558,8 +558,8 @@ class AsyncLlamaStackClientWithRawResponse:
         self.scoring_functions = scoring_functions.AsyncScoringFunctionsResourceWithRawResponse(
             client.scoring_functions
         )
+        self.sdg_functions = sdg_functions.AsyncSDGFunctionsResourceWithRawResponse(client.sdg_functions)
         self.benchmarks = benchmarks.AsyncBenchmarksResourceWithRawResponse(client.benchmarks)
-        self.pipelines = pipelines.AsyncPipelinesResourceWithRawResponse(client.pipelines)
 
 
 class LlamaStackClientWithStreamedResponse:
@@ -589,8 +589,8 @@ class LlamaStackClientWithStreamedResponse:
         self.scoring_functions = scoring_functions.ScoringFunctionsResourceWithStreamingResponse(
             client.scoring_functions
         )
+        self.sdg_functions = sdg_functions.SDGFunctionsResourceWithStreamingResponse(client.sdg_functions)
         self.benchmarks = benchmarks.BenchmarksResourceWithStreamingResponse(client.benchmarks)
-        self.pipelines = pipelines.PipelinesResourceWithStreamingResponse(client.pipelines)
 
 
 class AsyncLlamaStackClientWithStreamedResponse:
@@ -622,8 +622,8 @@ class AsyncLlamaStackClientWithStreamedResponse:
         self.scoring_functions = scoring_functions.AsyncScoringFunctionsResourceWithStreamingResponse(
             client.scoring_functions
         )
+        self.sdg_functions = sdg_functions.AsyncSDGFunctionsResourceWithStreamingResponse(client.sdg_functions)
         self.benchmarks = benchmarks.AsyncBenchmarksResourceWithStreamingResponse(client.benchmarks)
-        self.pipelines = pipelines.AsyncPipelinesResourceWithStreamingResponse(client.pipelines)
 
 
 Client = LlamaStackClient

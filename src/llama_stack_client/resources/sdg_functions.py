@@ -6,7 +6,7 @@ from typing import Dict, Type, Union, Iterable, Optional, cast
 
 import httpx
 
-from ..types import pipeline_register_params
+from ..types import sdg_function_register_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import (
     maybe_transform,
@@ -22,37 +22,36 @@ from .._response import (
 )
 from .._wrappers import DataWrapper
 from .._base_client import make_request_options
-from ..types.shared_params.url import URL
-from ..types.pipeline_list_response import PipelineListResponse
-from ..types.shared_params.param_type import ParamType
-from ..types.pipeline_retrieve_response import PipelineRetrieveResponse
+from ..types.sdg_fn import SDGFn
+from ..types.sdg_fn_params_param import SDGFnParamsParam
+from ..types.sdg_function_list_response import SDGFunctionListResponse
 
-__all__ = ["PipelinesResource", "AsyncPipelinesResource"]
+__all__ = ["SDGFunctionsResource", "AsyncSDGFunctionsResource"]
 
 
-class PipelinesResource(SyncAPIResource):
+class SDGFunctionsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> PipelinesResourceWithRawResponse:
+    def with_raw_response(self) -> SDGFunctionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/llama-stack-python#accessing-raw-response-data-eg-headers
         """
-        return PipelinesResourceWithRawResponse(self)
+        return SDGFunctionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> PipelinesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> SDGFunctionsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/llama-stack-python#with_streaming_response
         """
-        return PipelinesResourceWithStreamingResponse(self)
+        return SDGFunctionsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
-        pipeline_id: str,
+        sdg_fn_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -60,7 +59,7 @@ class PipelinesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[PipelineRetrieveResponse]:
+    ) -> SDGFn:
         """
         Args:
           extra_headers: Send extra headers
@@ -71,14 +70,14 @@ class PipelinesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pipeline_id:
-            raise ValueError(f"Expected a non-empty value for `pipeline_id` but received {pipeline_id!r}")
+        if not sdg_fn_id:
+            raise ValueError(f"Expected a non-empty value for `sdg_fn_id` but received {sdg_fn_id!r}")
         return self._get(
-            f"/v1/pipelines/{pipeline_id}",
+            f"/v1/sdg-functions/{sdg_fn_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PipelineRetrieveResponse,
+            cast_to=SDGFn,
         )
 
     def list(
@@ -90,25 +89,25 @@ class PipelinesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PipelineListResponse:
+    ) -> SDGFunctionListResponse:
         return self._get(
-            "/v1/pipelines",
+            "/v1/sdg-functions",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[PipelineListResponse]._unwrapper,
+                post_parser=DataWrapper[SDGFunctionListResponse]._unwrapper,
             ),
-            cast_to=cast(Type[PipelineListResponse], DataWrapper[PipelineListResponse]),
+            cast_to=cast(Type[SDGFunctionListResponse], DataWrapper[SDGFunctionListResponse]),
         )
 
     def register(
         self,
         *,
-        pipeline_id: str,
-        input_dataset_schema: Dict[str, ParamType],
-        metadata: Dict[str, Union[bool, float, str, Iterable[object], object, None]] | NotGiven = NOT_GIVEN,
+        description: str,
+        sdg_fn_id: str,
+        params: SDGFnParamsParam | NotGiven = NOT_GIVEN,
         provider_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -129,15 +128,15 @@ class PipelinesResource(SyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            "/v1/pipelines",
+            "/v1/sdg-functions",
             body=maybe_transform(
                 {
-                    "pipeline_id": pipeline_id,
-                    "input_dataset_schema": input_dataset_schema,
-                    "metadata": metadata,
+                    "description": description,
+                    "sdg_fn_id": sdg_fn_id,
+                    "params": params,
                     "provider_id": provider_id,
                 },
-                pipeline_register_params.PipelineRegisterParams,
+                sdg_function_register_params.SDGFunctionRegisterParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -147,7 +146,7 @@ class PipelinesResource(SyncAPIResource):
 
     def unregister(
         self,
-        pipeline_id: str,
+        sdg_fn_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -166,11 +165,11 @@ class PipelinesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pipeline_id:
-            raise ValueError(f"Expected a non-empty value for `pipeline_id` but received {pipeline_id!r}")
+        if not sdg_fn_id:
+            raise ValueError(f"Expected a non-empty value for `sdg_fn_id` but received {sdg_fn_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/v1/pipelines/{pipeline_id}",
+            f"/v1/sdg-functions/{sdg_fn_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -178,29 +177,29 @@ class PipelinesResource(SyncAPIResource):
         )
 
 
-class AsyncPipelinesResource(AsyncAPIResource):
+class AsyncSDGFunctionsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncPipelinesResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncSDGFunctionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/llama-stack-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncPipelinesResourceWithRawResponse(self)
+        return AsyncSDGFunctionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncPipelinesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncSDGFunctionsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/llama-stack-python#with_streaming_response
         """
-        return AsyncPipelinesResourceWithStreamingResponse(self)
+        return AsyncSDGFunctionsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
-        pipeline_id: str,
+        sdg_fn_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -208,7 +207,7 @@ class AsyncPipelinesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[PipelineRetrieveResponse]:
+    ) -> SDGFn:
         """
         Args:
           extra_headers: Send extra headers
@@ -219,14 +218,14 @@ class AsyncPipelinesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pipeline_id:
-            raise ValueError(f"Expected a non-empty value for `pipeline_id` but received {pipeline_id!r}")
+        if not sdg_fn_id:
+            raise ValueError(f"Expected a non-empty value for `sdg_fn_id` but received {sdg_fn_id!r}")
         return await self._get(
-            f"/v1/pipelines/{pipeline_id}",
+            f"/v1/sdg-functions/{sdg_fn_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PipelineRetrieveResponse,
+            cast_to=SDGFn,
         )
 
     async def list(
@@ -238,24 +237,23 @@ class AsyncPipelinesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PipelineListResponse:
+    ) -> SDGFunctionListResponse:
         return await self._get(
-            "/v1/pipelines",
+            "/v1/sdg-functions",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[PipelineListResponse]._unwrapper,
+                post_parser=DataWrapper[SDGFunctionListResponse]._unwrapper,
             ),
-            cast_to=cast(Type[PipelineListResponse], DataWrapper[PipelineListResponse]),
+            cast_to=cast(Type[SDGFunctionListResponse], DataWrapper[SDGFunctionListResponse]),
         )
 
     async def register(
         self,
         *,
-        pipeline_id: str,
-        input_dataset_schema: Dict[str, ParamType],
+        sdg_fn_id: str,
         metadata: Dict[str, Union[bool, float, str, Iterable[object], object, None]] | NotGiven = NOT_GIVEN,
         provider_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -277,15 +275,15 @@ class AsyncPipelinesResource(AsyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            "/v1/pipelines",
+            "/v1/sdg-functions",
             body=await async_maybe_transform(
                 {
-                    "pipeline_id": pipeline_id,
+                    "sdg_fn_id": sdg_fn_id,
                     "input_dataset_schema": input_dataset_schema,
                     "metadata": metadata,
                     "provider_id": provider_id,
                 },
-                pipeline_register_params.PipelineRegisterParams,
+                sdg_function_register_params.SDGFunctionRegisterParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -295,7 +293,7 @@ class AsyncPipelinesResource(AsyncAPIResource):
 
     async def unregister(
         self,
-        pipeline_id: str,
+        sdg_fn_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -314,11 +312,11 @@ class AsyncPipelinesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pipeline_id:
-            raise ValueError(f"Expected a non-empty value for `pipeline_id` but received {pipeline_id!r}")
+        if not sdg_fn_id:
+            raise ValueError(f"Expected a non-empty value for `sdg_fn_id` but received {sdg_fn_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/v1/pipelines/{pipeline_id}",
+            f"/v1/sdg-functions/{sdg_fn_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -326,73 +324,73 @@ class AsyncPipelinesResource(AsyncAPIResource):
         )
 
 
-class PipelinesResourceWithRawResponse:
-    def __init__(self, pipelines: PipelinesResource) -> None:
-        self._pipelines = pipelines
+class SDGFunctionsResourceWithRawResponse:
+    def __init__(self, sdg_functions: SDGFunctionsResource) -> None:
+        self._sdg_functions = sdg_functions
 
         self.retrieve = to_raw_response_wrapper(
-            pipelines.retrieve,
+            sdg_functions.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            pipelines.list,
+            sdg_functions.list,
         )
         self.register = to_raw_response_wrapper(
-            pipelines.register,
+            sdg_functions.register,
         )
         self.unregister = to_raw_response_wrapper(
-            pipelines.unregister,
+            sdg_functions.unregister,
         )
 
 
-class AsyncPipelinesResourceWithRawResponse:
-    def __init__(self, pipelines: AsyncPipelinesResource) -> None:
-        self._pipelines = pipelines
+class AsyncSDGFunctionsResourceWithRawResponse:
+    def __init__(self, sdg_functions: AsyncSDGFunctionsResource) -> None:
+        self._sdg_functions = sdg_functions
 
         self.retrieve = async_to_raw_response_wrapper(
-            pipelines.retrieve,
+            sdg_functions.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            pipelines.list,
+            sdg_functions.list,
         )
         self.register = async_to_raw_response_wrapper(
-            pipelines.register,
+            sdg_functions.register,
         )
         self.unregister = async_to_raw_response_wrapper(
-            pipelines.unregister,
+            sdg_functions.unregister,
         )
 
 
-class PipelinesResourceWithStreamingResponse:
-    def __init__(self, pipelines: PipelinesResource) -> None:
-        self._pipelines = pipelines
+class SDGFunctionsResourceWithStreamingResponse:
+    def __init__(self, sdg_functions: SDGFunctionsResource) -> None:
+        self._sdg_functions = sdg_functions
 
         self.retrieve = to_streamed_response_wrapper(
-            pipelines.retrieve,
+            sdg_functions.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            pipelines.list,
+            sdg_functions.list,
         )
         self.register = to_streamed_response_wrapper(
-            pipelines.register,
+            sdg_functions.register,
         )
         self.unregister = to_streamed_response_wrapper(
-            pipelines.unregister,
+            sdg_functions.unregister,
         )
 
 
-class AsyncPipelinesResourceWithStreamingResponse:
-    def __init__(self, pipelines: AsyncPipelinesResource) -> None:
-        self._pipelines = pipelines
+class AsyncSDGFunctionsResourceWithStreamingResponse:
+    def __init__(self, sdg_functions: AsyncSDGFunctionsResource) -> None:
+        self._sdg_functions = sdg_functions
 
         self.retrieve = async_to_streamed_response_wrapper(
-            pipelines.retrieve,
+            sdg_functions.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            pipelines.list,
+            sdg_functions.list,
         )
         self.register = async_to_streamed_response_wrapper(
-            pipelines.register,
+            sdg_functions.register,
         )
         self.unregister = async_to_streamed_response_wrapper(
-            pipelines.unregister,
+            sdg_functions.unregister,
         )

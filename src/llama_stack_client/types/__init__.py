@@ -71,7 +71,6 @@ from .scoring_score_params import ScoringScoreParams as ScoringScoreParams
 from .shield_list_response import ShieldListResponse as ShieldListResponse
 from .agent_create_response import AgentCreateResponse as AgentCreateResponse
 from .dataset_list_response import DatasetListResponse as DatasetListResponse
-from .pipeline_list_response import PipelineListResponse as PipelineListResponse
 from .list_shields_response import ListShieldsResponse as ListShieldsResponse
 from .memory_retrieval_step import MemoryRetrievalStep as MemoryRetrievalStep
 from .model_register_params import ModelRegisterParams as ModelRegisterParams
@@ -88,7 +87,6 @@ from .vector_io_query_params import VectorIoQueryParams as VectorIoQueryParams
 from .benchmark_list_response import BenchmarkListResponse as BenchmarkListResponse
 from .dataset_iterrows_params import DatasetIterrowsParams as DatasetIterrowsParams
 from .dataset_register_params import DatasetRegisterParams as DatasetRegisterParams
-from .pipeline_register_params import PipelineRegisterParams as PipelineRegisterParams
 from .list_providers_response import ListProvidersResponse as ListProvidersResponse
 from .scoring_fn_params_param import ScoringFnParamsParam as ScoringFnParamsParam
 from .toolgroup_list_response import ToolgroupListResponse as ToolgroupListResponse
@@ -101,7 +99,6 @@ from .benchmark_register_params import BenchmarkRegisterParams as BenchmarkRegis
 from .dataset_iterrows_response import DatasetIterrowsResponse as DatasetIterrowsResponse
 from .dataset_register_response import DatasetRegisterResponse as DatasetRegisterResponse
 from .dataset_retrieve_response import DatasetRetrieveResponse as DatasetRetrieveResponse
-from .pipeline_retrieve_response import PipelineRetrieveResponse as PipelineRetrieveResponse
 from .eval_evaluate_rows_params import EvalEvaluateRowsParams as EvalEvaluateRowsParams
 from .list_tool_groups_response import ListToolGroupsResponse as ListToolGroupsResponse
 from .toolgroup_register_params import ToolgroupRegisterParams as ToolgroupRegisterParams
@@ -118,6 +115,7 @@ from .scoring_score_batch_response import ScoringScoreBatchResponse as ScoringSc
 from .telemetry_query_spans_params import TelemetryQuerySpansParams as TelemetryQuerySpansParams
 from .telemetry_query_traces_params import TelemetryQueryTracesParams as TelemetryQueryTracesParams
 from .scoring_function_list_response import ScoringFunctionListResponse as ScoringFunctionListResponse
+from .sdg_function_list_response import SDGFunctionListResponse as SDGFunctionListResponse
 from .telemetry_get_span_tree_params import TelemetryGetSpanTreeParams as TelemetryGetSpanTreeParams
 from .telemetry_query_spans_response import TelemetryQuerySpansResponse as TelemetryQuerySpansResponse
 from .tool_runtime_list_tools_params import ToolRuntimeListToolsParams as ToolRuntimeListToolsParams

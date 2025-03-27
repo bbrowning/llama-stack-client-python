@@ -120,14 +120,6 @@ from .benchmarks import (
     BenchmarksResourceWithStreamingResponse,
     AsyncBenchmarksResourceWithStreamingResponse,
 )
-from .pipelines import (
-    PipelinesResource,
-    AsyncPipelinesResource,
-    PipelinesResourceWithRawResponse,
-    AsyncPipelinesResourceWithRawResponse,
-    PipelinesResourceWithStreamingResponse,
-    AsyncPipelinesResourceWithStreamingResponse,
-)
 from .toolgroups import (
     ToolgroupsResource,
     AsyncToolgroupsResource,
@@ -175,6 +167,14 @@ from .scoring_functions import (
     AsyncScoringFunctionsResourceWithRawResponse,
     ScoringFunctionsResourceWithStreamingResponse,
     AsyncScoringFunctionsResourceWithStreamingResponse,
+)
+from .sdg_functions import (
+    SDGFunctionsResource,
+    AsyncSDGFunctionsResource,
+    SDGFunctionsResourceWithRawResponse,
+    AsyncSDGFunctionsResourceWithRawResponse,
+    SDGFunctionsResourceWithStreamingResponse,
+    AsyncSDGFunctionsResourceWithStreamingResponse,
 )
 from .synthetic_data_generation import (
     SyntheticDataGenerationResource,
@@ -312,16 +312,16 @@ __all__ = [
     "AsyncScoringFunctionsResourceWithRawResponse",
     "ScoringFunctionsResourceWithStreamingResponse",
     "AsyncScoringFunctionsResourceWithStreamingResponse",
+    "SDGFunctionsResource",
+    "AsyncSDGFunctionsResource",
+    "SDGFunctionsResourceWithRawResponse",
+    "AsyncSDGFunctionsResourceWithRawResponse",
+    "SDGFunctionsResourceWithStreamingResponse",
+    "AsyncSDGFunctionsResourceWithStreamingResponse",
     "BenchmarksResource",
     "AsyncBenchmarksResource",
     "BenchmarksResourceWithRawResponse",
     "AsyncBenchmarksResourceWithRawResponse",
     "BenchmarksResourceWithStreamingResponse",
     "AsyncBenchmarksResourceWithStreamingResponse",
-    "PipelinesResource",
-    "AsyncPipelinesResource",
-    "PipelinesResourceWithRawResponse",
-    "AsyncPipelinesResourceWithRawResponse",
-    "PipelinesResourceWithStreamingResponse",
-    "AsyncPipelinesResourceWithStreamingResponse",
 ]

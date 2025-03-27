@@ -13,6 +13,6 @@ __all__ = ["SyntheticDataGenerationGenerateParams"]
 class SyntheticDataGenerationGenerateParams(TypedDict, total=False):
     dataset_id: str
 
-    pipeline_id: str
+    sdg_fn_id: str
 
     metadata: Dict[str, Union[bool, float, str, Iterable[object], object, None]]
